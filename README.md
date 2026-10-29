@@ -1,4 +1,15 @@
-# Agent State Proof (MVP)
+# Agent State Proof
+
+Two small, separate tools for reliable AI agents:
+
+- **Snapshot CLI (v0.1)** - `asp.py`, described below. Signs a JSON file with the state an agent *declares*.
+- **Audit hook (v0.2)** - `asp_audit.py`, described in [README_audit.md](README_audit.md). Records the tool calls Claude Code *actually* makes in a hash-chained log, with a threat model.
+
+Each has its own `verify` command and its own limitations.
+
+---
+
+# Snapshot CLI (v0.1)
 
 **Minimal HMAC-signed snapshot of an AI agent's declared state.**
 
@@ -18,19 +29,13 @@ This is **tamper-evidence for a file**, not a cryptographic proof that the JSON 
 
 ---
 
-## Limitations
+## Limitations (snapshot CLI)
 
 - **No agent integration.** You must manually export the state to JSON.
 - **Trust is in the key.** Anyone with `ASP_SECRET` can create valid snapshots. Without the key, snapshots cannot be forged.
 - **No freshness.** There is no expiry. An old snapshot remains valid forever.
 - **Does not prove real agent state.** It only proves that the JSON file (and the timestamp it was signed with) has not changed.
 - **Summary fields are declared, not verified.** Values like memory status come from the same JSON you provide and are not part of the signature.
-
----
-
-## v0.2: audit hook for Claude Code
-
-See [README_audit.md](README_audit.md) for the hash-chained audit log of real Claude Code tool calls, including the threat model.
 
 ---
 

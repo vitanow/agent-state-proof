@@ -63,3 +63,5 @@ Exit codes: `0` chain intact, `1` broken, `2` error (log missing/unreadable).
   On Windows, parallel hooks could interleave.
 - The HMAC key is symmetric: whoever can verify can also forge.
 - Logs `PreToolUse` events only: what was requested, not whether it ran or what happened.
+- If the last line of the log is corrupted (for example a crash or full disk mid-write), the hook stops logging until you fix that line by hand. A fix is planned for v0.2.1.
+- Set `ASP_SECRET` for all sessions or for none. A mixed log cannot be verified with the key, by design: otherwise MACs could be stripped and the chain replaced.
