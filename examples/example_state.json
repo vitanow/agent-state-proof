@@ -1,0 +1,7 @@
+{
+  "agent_id": "demo-agent",
+  "memory": {"drift_detected": false},
+  "tools": [{"name": "read_file", "allowed": true}, {"name": "send_payment", "allowed": false}],
+  "context": {"message_count": 12},
+  "intended_action": "read_file"
+}
